@@ -1,19 +1,23 @@
-from .models import Book, Library
-
+# Prepare a Python script query_samples.py in the relationship_app directory. This script should contain the query for each of the following of relationship:
 # Query all books by a specific author.
-
-def get_books_by_author(author_name):
-    books = Book.objects.filter(author__name=author_name)
-    return books
-
 # List all books in a library.
-
-def get_books_in_library(library_name):
-    books = Book.objects.filter(library__name=library_name)
-    return books
-
 # Retrieve the librarian for a library.
 
-def get_librarian_for_library(library_name):
-    librarian = Library.objects.get(name=library_name).librarian
-    return librarian
+from relationship_app.models import Book, Author, Library
+
+
+def query_all_books_by_author(author_name):
+    author = Author.objects.get(name=author_name)
+    books = Book.objects.filter(author=author)
+    return books
+
+
+def query_all_books_in_library(library_name):
+    library = Library.objects.get(name=library_name)
+    books = library.books.all()
+    return books
+
+
+def query_librarian_for_library(library_name):
+    library = Library.objects.get(name=library_name)
+    return library.librarian
