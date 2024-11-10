@@ -44,9 +44,9 @@ def is_librarian(user):
 def is_member(user):
     return user.userprofile.role == 'Member'
 
-admin_view = user_passes_test(is_admin)(admin_view)
-librarian_view = user_passes_test(is_librarian)(librarian_view)
-member_view = user_passes_test(is_member)(member_view)
+admin_view = user_passes_test(is_admin)
+librarian_view = user_passes_test(is_librarian)
+member_view = user_passes_test(is_member)
 
 @admin_view
 def admin_view(request):
