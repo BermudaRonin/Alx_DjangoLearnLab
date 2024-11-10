@@ -3,12 +3,12 @@ from django.views.generic.detail import DetailView
 from .models import Book
 from .models import Library
 
-def list_all_books(request):
+def list_books(request):
     books = Book.objects.all()
     context = {"books": books}
     return render(request, "relationship_app/list_books.html", context)
 
-class LibraryDetailsView(DetailView):
+class LibraryDetailView(DetailView):
     model = Library
     template_name = "relationship_app/library_detail.html"
 
