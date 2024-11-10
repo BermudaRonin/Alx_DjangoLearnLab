@@ -5,6 +5,8 @@ from .models import Library
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.db import models
+from django.contrib.auth.models import User
 
 
 def list_books(request):
@@ -50,3 +52,17 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect("login")
+
+
+class UserProfile(models.Model):
+    ROLE_CHOICES = (
+        ("Admin", "Admin"),
+        ("Librarian", "Librarian"),
+        ("Member", "Member"),
+    )
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.role}"
