@@ -44,21 +44,17 @@ def is_librarian(user):
 def is_member(user):
     return user.userprofile.role == 'Member'
 
-admin_view = user_passes_test(is_admin)
-librarian_view = user_passes_test(is_librarian)
-member_view = user_passes_test(is_member)
-
-@admin_view
+@user_passes_test(is_admin)
 def admin_view(request):
-    return render(request, 'admin_view.html')
+    return render(request, 'relationship_app/admin_view.html')
 
-@librarian_view
+@user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'librarian_view.html')
+    return render(request, 'relationship_app/librarian_view.html')
 
-@member_view
+@user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'member_view.html')
+    return render(request, 'relationship_app/member_view.html')
 
 
 # @permission_required('relationship_app.can_add_book', raise_exception=True)
