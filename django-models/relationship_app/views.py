@@ -35,15 +35,6 @@ def register(request):
 
 # Task 3 : Implement Role-Based Access Control in Django
 
-def admin_view(request):
-    return render(request, 'admin_view.html')
-
-def librarian_view(request):
-    return render(request, 'librarian_view.html')
-
-def member_view(request):
-    return render(request, 'member_view.html')
-
 def is_admin(user):
     return user.userprofile.role == 'Admin'
 
@@ -53,10 +44,22 @@ def is_librarian(user):
 def is_member(user):
     return user.userprofile.role == 'Member'
 
-# Apply permission checks to views
 admin_view = user_passes_test(is_admin)(admin_view)
 librarian_view = user_passes_test(is_librarian)(librarian_view)
 member_view = user_passes_test(is_member)(member_view)
+
+@admin_view
+def admin_view(request):
+    return render(request, 'admin_view.html')
+
+@librarian_view
+def librarian_view(request):
+    return render(request, 'librarian_view.html')
+
+@member_view
+def member_view(request):
+    return render(request, 'member_view.html')
+
 
 # @permission_required('relationship_app.can_add_book', raise_exception=True)
 # def add_book(request):
