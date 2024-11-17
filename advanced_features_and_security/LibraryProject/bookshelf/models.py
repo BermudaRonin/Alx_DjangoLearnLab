@@ -46,3 +46,17 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
+
+class Article(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    class Meta:
+        permissions=[
+            ('can_view', 'can view article'),
+            ('can_create', 'can create article'),
+            ('can_edit', 'can edit article'),
+            ('can_delete', 'can delete article'),
+        ]   
+    
