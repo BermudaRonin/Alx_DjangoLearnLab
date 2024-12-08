@@ -96,3 +96,6 @@ class CommentUpdateView(UpdateView):
 class CommentDeleteView(DeleteView):
     model = Comment
     template_name = 'comment_delete.html'
+
+
+# ["Post.objects.filter", "title__icontains", "tags__name__icontains", "content__icontains"]
