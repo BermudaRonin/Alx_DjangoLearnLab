@@ -149,4 +149,4 @@ SECURE_SSL_REDIRECT = True
 
 PORT = 8000
 
-collectstatic = True
+STATIC_ROOT = BASE_DIR / 'staticfiles'
