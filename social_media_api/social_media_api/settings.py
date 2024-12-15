@@ -148,3 +148,5 @@ SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
 
 PORT = 8000
+
+collectstatic = True
